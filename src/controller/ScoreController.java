@@ -1,26 +1,26 @@
 package controller;
 
 import model.Ball;
+import view.GameView;
 
 public class ScoreController {
 
-	public ScoreController() {
-		// TODO Auto-generated constructor stub
+	private GameView gameView;
+
+	public ScoreController(GameView gameView) {
+		this.gameView = gameView;
 	}
 
-	public String getScore() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getScore() {
+		return gameView.getGameController().getGame().getScore();
 	}
 
-	public String getLevel() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getLevel() {
+		return gameView.getGameController().getGame().getLevel();
 	}
 
 	public Ball getNextBall() {
-		// TODO Auto-generated method stub
-		return null;
+		return gameView.getGameController().getGame().getNextBall();
 	}
 
 }

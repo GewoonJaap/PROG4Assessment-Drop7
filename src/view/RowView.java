@@ -17,10 +17,10 @@ public class RowView extends BorderPane {
 
 	public RowView(Row row) {
 		this.row = row;
-		DrawView();
+		drawView();
 	}
 
-	private void DrawView() {
+	private void drawView() {
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 		if (row.getBall() != null) {
 			addBall();

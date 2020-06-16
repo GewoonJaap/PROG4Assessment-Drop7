@@ -1,13 +1,12 @@
 package view;
 
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import model.Ball;
 import model.Row;
 
 public class RowView extends BorderPane {
@@ -15,8 +14,8 @@ public class RowView extends BorderPane {
 	private Row row;
 	private BallView ballView;
 
-	public RowView() {
-		this.row = row = new Row(null);
+	public RowView(Row row) {
+		this.row = row;
 		drawView();
 	}
 
@@ -26,7 +25,7 @@ public class RowView extends BorderPane {
 			addBall();
 		}
 		this.setMinSize(64.0, 64.0);
-		this.resize(64.0, 64.0);
+		this.setMaxSize(64.0, 64.0);
 	}
 
 	private void addBall() {

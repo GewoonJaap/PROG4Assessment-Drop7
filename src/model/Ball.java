@@ -11,7 +11,7 @@ public class Ball {
 	}
 
 	public String getImage() {
-		// TODO Auto-generated method stub
+		System.out.println(image);
 		return image;
 	}
 	

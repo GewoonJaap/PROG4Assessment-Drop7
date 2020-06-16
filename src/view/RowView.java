@@ -13,6 +13,8 @@ public class RowView extends BorderPane {
 
 	private Row row;
 	private BallView ballView;
+	private int WIDTH = 64;
+	private int HEIGHT = 64;
 
 	public RowView(Row row) {
 		this.row = row;
@@ -24,8 +26,8 @@ public class RowView extends BorderPane {
 		if (row.getBall() != null) {
 			addBall();
 		}
-		this.setMinSize(64.0, 64.0);
-		this.setMaxSize(64.0, 64.0);
+		this.setMinSize(WIDTH, HEIGHT);
+		this.setMaxSize(WIDTH, HEIGHT);
 	}
 
 	private void addBall() {

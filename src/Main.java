@@ -16,6 +16,7 @@ public class Main extends Application {
 		Scene scene = new Scene(gameController.getGameView() , 720, 720);
 		stage.setScene(scene);
 		stage.setTitle("PROG 4 Assesment Jaap Rodenburg 2151202");
+		stage.setResizable(false);
 		stage.show();
 		
 	}

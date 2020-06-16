@@ -15,16 +15,18 @@ public class RowView extends BorderPane {
 	private Row row;
 	private BallView ballView;
 
-	public RowView(Row row) {
-		this.row = row;
+	public RowView() {
+		this.row = row = new Row(null);
 		drawView();
 	}
 
 	private void drawView() {
-		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		if (row.getBall() != null) {
 			addBall();
 		}
+		this.setMinSize(64.0, 64.0);
+		this.resize(64.0, 64.0);
 	}
 
 	private void addBall() {

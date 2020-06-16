@@ -13,7 +13,7 @@ import model.Row;
 public class RowView extends BorderPane {
 
 	private Row row;
-	private ImageView ballImage;
+	private BallView ballView;
 
 	public RowView(Row row) {
 		this.row = row;
@@ -22,11 +22,14 @@ public class RowView extends BorderPane {
 
 	private void DrawView() {
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		if (row.getBall() != null) {
+			addBall();
+		}
 	}
 
 	private void addBall() {
-		ballImage.setImage(new Image(row.getBall().getImage()));
-		this.setCenter(ballImage);
+		ballView = new BallView(row.getBall());
+		this.setCenter(ballView);
 
 	}
 

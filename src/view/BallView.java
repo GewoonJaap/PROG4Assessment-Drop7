@@ -1,9 +1,18 @@
 package view;
 
-public class BallView {
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import model.Ball;
 
-	public BallView() {
-		// TODO Auto-generated constructor stub
+public class BallView extends ImageView {
+
+	private Ball ball;
+	public BallView(Ball ball) {
+		this.ball = ball;
+	}
+	
+	private void createView() {
+		this.setImage(new Image(ball.getImage()));
 	}
 
 }

@@ -25,10 +25,10 @@ public class BoardController {
 	public void clickedRow(Row newRow) {
 		System.out.println("Clicked row at: X: " + newRow.getX() + " Y:" + newRow.getY());
 		Row[][] rows = boardView.getRows();
-		for (int x = 6; x >= 0; x--) {
-			if (rows[newRow.getY()][x].getBall() == null) {
-				rows[newRow.getY()][x].setBall(gameView.getGameController().getGame().getNextBall());
-				boardView.addRow(rows[newRow.getY()][x]);
+		for (int y = 6; y >= 0; y--) {
+			if (rows[y][newRow.getX()].getBall() == null) {
+				rows[y][newRow.getX()].setBall(gameView.getGameController().getGame().getNextBall());
+				boardView.addRow(rows[y][newRow.getX()]);
 				gameView.getGameController().getGame().setNextBall();
 				break;
 			}

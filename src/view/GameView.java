@@ -43,7 +43,7 @@ public class GameView extends BorderPane {
 		this.setCenter(vBox);
 
 	}
-	
+
 	public void showGameOver() {
 		this.getChildren().clear();
 		Label gameOver = new Label("GAME OVER");

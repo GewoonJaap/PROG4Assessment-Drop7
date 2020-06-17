@@ -41,7 +41,6 @@ public class ScoreController {
 		return gameView.getGameController().getGame().getBallLeft();
 	}
 
-
 	public void resetBallLeft() {
 		gameView.getGameController().getGame().resetBallLeft();
 	}

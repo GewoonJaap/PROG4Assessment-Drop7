@@ -13,12 +13,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		GameController gameController = new GameController(stage);
-		Scene scene = new Scene(gameController.getGameView() , 720, 720);
+		Scene scene = new Scene(gameController.getGameView(), 720, 720);
 		stage.setScene(scene);
-		stage.setTitle("PROG 4 Assesment Jaap Rodenburg 2151202");
+		stage.setTitle("PROG ASS – Drop7 - Jaap Rodenburg");
 		stage.setResizable(false);
 		stage.show();
-		
+
 	}
 
 }

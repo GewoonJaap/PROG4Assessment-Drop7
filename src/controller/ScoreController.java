@@ -8,12 +8,9 @@ public class ScoreController {
 
 	private GameView gameView;
 	private ScoreView scoreView;
-	private int BallLeft;
-	private int BallLeft_START = 30;
 
 	public ScoreController(GameView gameView) {
 		this.gameView = gameView;
-		BallLeft = BallLeft_START;
 	}
 
 	public void setScoreView(ScoreView scoreView) {
@@ -41,15 +38,12 @@ public class ScoreController {
 	}
 
 	public int getBallLeft() {
-		return BallLeft;
+		return gameView.getGameController().getGame().getBallLeft();
 	}
 
-	public void removeBallLeft() {
-		BallLeft--;
-	}
 
 	public void resetBallLeft() {
-		BallLeft = BallLeft_START;
+		gameView.getGameController().getGame().resetBallLeft();
 	}
 
 }

@@ -9,14 +9,18 @@ public class Game {
 	private int score;
 	private int level;
 	private Ball nextBall;
+	private int ballLeft;
+	private int BallLeft_START = 30;
 
 	public Game() {
 		score = 0;
 		level = 1;
+		ballLeft = BallLeft_START;
 		setNextBall();
 	}
 
 	public void setNextBall() {
+		removeBallLeft();
 		int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
 		Random random = new Random();
 		// 25% chance for a full ball
@@ -49,6 +53,18 @@ public class Game {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	private void removeBallLeft() {
+		ballLeft--;
+	}
+
+	public int getBallLeft() {
+		return ballLeft;
+	}
+
+	public void resetBallLeft() {
+		ballLeft = BallLeft_START;
 	}
 
 }

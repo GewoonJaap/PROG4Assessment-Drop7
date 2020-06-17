@@ -4,6 +4,7 @@ import controller.BoardController;
 import controller.GameController;
 import controller.ScoreController;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -41,6 +42,12 @@ public class GameView extends BorderPane {
 		vBox.getChildren().addAll(scoreView, boardView);
 		this.setCenter(vBox);
 
+	}
+	
+	public void showGameOver() {
+		this.getChildren().clear();
+		Label gameOver = new Label("GAME OVER");
+		this.setCenter(gameOver);
 	}
 
 	public GameController getGameController() {

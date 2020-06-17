@@ -26,8 +26,10 @@ public class BoardView extends BorderPane {
 
 	private void drawView(boolean reDraw) {
 		this.getChildren().clear();
-		rowView = new RowView[ROWS_Y][ROWS_X];
-		row = new Row[ROWS_Y][ROWS_X];
+		if (!reDraw) {
+			rowView = new RowView[ROWS_Y][ROWS_X];
+			row = new Row[ROWS_Y][ROWS_X];
+		}
 
 		VBox vBox = new VBox(1.0);
 		for (int y = 0; y < ROWS_Y; y++) {

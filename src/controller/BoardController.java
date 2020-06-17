@@ -22,6 +22,11 @@ public class BoardController {
 
 	public void clickedRow(Row newRow) {
 		System.out.println("Clicked row at: X: " + newRow.getX() + " Y:" + newRow.getY());
+		Row[][] rows = boardView.getRows();
+		for(int x = 6; x >= 0; x--) {
+			System.out.println(rows[newRow.getY()][x].getBall());
+		}
 	}
+	
 
 }

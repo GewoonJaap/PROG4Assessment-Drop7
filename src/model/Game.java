@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 import view.BallView;
 
 public class Game {
@@ -16,7 +18,13 @@ public class Game {
 
 	public void setNextBall() {
 		int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
-		nextBall = new Ball(ballNr, "/resources/ball" + ballNr + ".gif");
+		Random random = new Random();
+		// 25% chance for a full ball
+		if ((random.nextInt(4) == 0)) {
+			nextBall = new Ball(ballNr, "/resources/full.png");
+			return;
+		}
+		nextBall = new Ball(ballNr, "/resources/" + ballNr + ".png");
 	}
 
 	public int getScore() {

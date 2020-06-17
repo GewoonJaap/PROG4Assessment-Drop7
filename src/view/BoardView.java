@@ -55,12 +55,12 @@ public class BoardView extends BorderPane {
 		System.out.println("Adding row");
 		drawView(true);
 	}
-	
-	public RowView[][] getRowView(){
+
+	public RowView[][] getRowView() {
 		return rowView;
 	}
-	
-	public Row[][] getRows(){
+
+	public Row[][] getRows() {
 		return row;
 	}
 

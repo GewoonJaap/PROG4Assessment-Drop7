@@ -20,7 +20,7 @@ public class GameController {
 	}
 	
 	private void startGame() {
-		gameView.getBoardController().addRow(new Row(new Ball(1, "/resources/ball2.gif"), 0, 6, gameView.getBoardController()));
+		
 	}
 
 	public GameView getGameView() {

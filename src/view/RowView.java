@@ -19,6 +19,7 @@ public class RowView extends BorderPane {
 	public RowView(Row row) {
 		this.row = row;
 		drawView();
+		this.setOnMouseClicked(e -> row.getBoardController().clickedRow(row));
 	}
 
 	public void setRow(Row row) {

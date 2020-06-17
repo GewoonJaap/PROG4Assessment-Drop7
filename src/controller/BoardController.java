@@ -19,4 +19,9 @@ public class BoardController {
 		boardView.addRow(row);
 	}
 
+
+	public void clickedRow(Row newRow) {
+		System.out.println("Clicked row at: X: " + newRow.getX() + " Y:" + newRow.getY());
+	}
+
 }

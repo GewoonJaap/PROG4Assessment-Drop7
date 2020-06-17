@@ -35,7 +35,7 @@ public class GameView extends BorderPane {
 		scoreController = new ScoreController(this);
 		scoreView = new ScoreView(scoreController);
 
-		boardController = new BoardController();
+		boardController = new BoardController(this);
 		BoardView boardView = new BoardView(boardController);
 		boardView.setMaxSize(448.0, 448.0);
 		vBox.getChildren().addAll(scoreView, boardView);

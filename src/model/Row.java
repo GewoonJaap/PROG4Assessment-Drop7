@@ -29,8 +29,13 @@ public class Row {
 	public int getY() {
 		return y;
 	}
+
 	public BoardController getBoardController() {
 		return boardController;
+	}
+
+	public void setBall(Ball ball) {
+		this.ball = ball;
 	}
 
 }

@@ -30,6 +30,7 @@ public class BoardController {
 				rows[y][newRow.getX()].setBall(gameView.getGameController().getGame().getNextBall());
 				boardView.addRow(rows[y][newRow.getX()]);
 				gameView.getGameController().getGame().setNextBall();
+				gameView.getScoreController().updateScoreView();
 				break;
 			}
 		}

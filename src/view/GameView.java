@@ -46,9 +46,13 @@ public class GameView extends BorderPane {
 	public GameController getGameController() {
 		return gameController;
 	}
-	
+
 	public BoardController getBoardController() {
 		return boardController;
+	}
+
+	public ScoreController getScoreController() {
+		return scoreController;
 	}
 
 }

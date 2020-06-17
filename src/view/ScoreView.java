@@ -16,16 +16,19 @@ public class ScoreView extends BorderPane {
 
 	public ScoreView(ScoreController scoreController) {
 		this.scoreController = scoreController;
+		scoreController.setScoreView(this);
 		createView();
 	}
 
-	private void createView() {
+	public void createView() {
+		this.getChildren().clear();
 		score = new Label("Score: " + Integer.toString(scoreController.getScore()));
 		level = new Label("Level: " + Integer.toString(scoreController.getLevel()));
 		nextBall = new BallView(scoreController.getNextBall());
 		vBox = new VBox(3.0);
 		vBox.getChildren().addAll(score, level, nextBall);
 		this.setCenter(vBox);
+		
 	}
 
 }

@@ -15,8 +15,8 @@ public class BoardController {
 		this.boardView = boardView;
 	}
 	
-	public void addRow(Row row, int x, int y) {
-		boardView.addRow(row, x, y);
+	public void addRow(Row row) {
+		boardView.addRow(row);
 	}
 
 }

@@ -20,13 +20,11 @@ public class RowView extends BorderPane {
 		this.row = row;
 		drawView();
 	}
-	
+
 	public void setRow(Row row) {
 		this.row = row;
 		drawView();
 	}
-	
-	
 
 	private void drawView() {
 		this.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));

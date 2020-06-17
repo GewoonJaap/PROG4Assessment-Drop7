@@ -11,7 +11,8 @@ public class GameController extends Thread {
 	private Stage main;
 	private Game game;
 	private Thread t;
-	private boolean loop;
+	private boolean loop = true;
+	private int LOOP_TIME = 2000;
 
 	public GameController(Stage main) {
 		this.main = main;
@@ -21,7 +22,6 @@ public class GameController extends Thread {
 	}
 
 	private void startGame() {
-		loop = true;
 		this.start();
 	}
 
@@ -38,7 +38,7 @@ public class GameController extends Thread {
 			int ballLeftSave = game.getBallLeft();
 			System.out.println("Loop");
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(LOOP_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

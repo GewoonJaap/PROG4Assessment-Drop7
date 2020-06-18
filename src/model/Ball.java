@@ -33,12 +33,9 @@ public class Ball {
 	}
 
 	public void breakBall() {
-		System.out.println("Breaking ball");
 		if (image.contains("full")) {
 			image = "/resources/half.png";
-			System.out.println("Now a half ball!");
 		} else if (image.contains("half")) {
-			System.out.println("Now a value ball");
 			image = "/resources/" + value + ".png";
 		}
 	}

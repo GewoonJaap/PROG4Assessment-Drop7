@@ -1,9 +1,11 @@
 package controller;
 
+import java.util.ArrayList;
+
+import model.Ball;
 import model.Row;
 import view.BoardView;
 import view.GameView;
-import view.RowView;
 
 public class BoardController {
 
@@ -40,8 +42,64 @@ public class BoardController {
 				boardView.addRow(rows[y][newRow.getX()]);
 				gameView.getGameController().getGame().setNextBall();
 				gameView.getScoreController().updateScoreView();
+				checkForDestroy();
 				break;
 			}
+		}
+	}
+
+	private void checkForDestroy() {
+		Row[][] rows = boardView.getRows();
+		ArrayList<Row> ballDestroy = new ArrayList<Row>();
+		for (int y = 6; y > 0; y--) {
+			for (int x = 6; x > 0; x--) {
+				if (rows[y][x].getBall() != null) {
+					int ballValue = rows[y][x].getBall().getValue();
+					int ballsy = 0;
+					int ballsx = 0;
+					for (int by = y; by < 6; by++) {
+						if (rows[by][x].getBall() != null) {
+							ballsy++;
+						} else {
+							break;
+						}
+					}
+					for (int by = y; by > 0; by--) {
+						if (rows[by][x].getBall() != null) {
+							ballsy++;
+						} else {
+							break;
+						}
+					}
+					System.out.println("#" + y + " " + x + "Ball y: " + ballsy);
+
+					for (int bx = x; bx < 6; bx++) {
+						if (rows[y][bx].getBall() != null) {
+							ballsx++;
+						} else {
+							break;
+						}
+					}
+					for (int bx = x; bx > 0; bx--) {
+						if (rows[y][bx].getBall() != null) {
+							ballsx++;
+						} else {
+							break;
+						}
+					}
+					System.out.println("#" + y + " " + x + "Ball x: " + ballsx);
+					if (ballsx == rows[y][x].getBall().getValue() || ballsy == rows[y][x].getBall().getValue()) {
+						System.out.println("We can destroy a ball! on Y: " + y + " X: " + x + " With value: "
+								+ rows[y][x].getBall().getValue());
+						ballDestroy.add(rows[y][x]);
+					}
+
+				}
+			}
+		}
+		System.out.println("Destroying all the balls!");
+		for (int i = 0; i < ballDestroy.size(); i++) {
+			boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
 		}
 	}
 

@@ -10,7 +10,7 @@ public class Game {
 	private int level;
 	private Ball nextBall;
 	private int ballLeft;
-	private int BallLeft_START = 20;
+	private int BallLeft_START = 30;
 
 	public Game() {
 		score = 0;
@@ -51,8 +51,8 @@ public class Game {
 		this.level = level;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	public void addToScore(int score) {
+		this.score += score;
 	}
 
 	private void removeBallLeft() {

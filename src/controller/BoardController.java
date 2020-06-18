@@ -163,6 +163,7 @@ public class BoardController {
 				} catch (Exception e) {
 				}
 				boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
+				updateScore();
 			}
 		}
 		rows = boardView.getRows();
@@ -190,4 +191,19 @@ public class BoardController {
 		return;
 	}
 
+	private void updateScore() {
+		gameView.getGameController().getGame().addToScore(10);
+		boolean emptyfield = true;
+		for (int x = 0; x <= 6; x++) {
+			Row[][] rows = boardView.getRows();
+			if (rows[6][x].getBall() != null) {
+				emptyfield = false;
+				break;
+			}
+		}
+		if (emptyfield) {
+			gameView.getGameController().getGame().addToScore(100);
+			gameView.getScoreController().updateScoreView();
+		}
+	}
 }

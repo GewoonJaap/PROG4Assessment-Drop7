@@ -107,25 +107,33 @@ public class BoardController {
 			}
 		}
 		// System.out.println("Destroying all the balls!");
-		if( ballDestroy.size() == 0) return;
+		if (ballDestroy.size() == 0)
+			return;
 		for (int i = 0; i < ballDestroy.size(); i++) {
-			boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
+			if (ballDestroy.get(i).getBall().canBeDestroyed()) {
+				boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
+			}
 		}
 		rows = boardView.getRows();
 		for (int x = 0; x < 6; x++) {
 			int nullpoint = -1;
+			int goDown = -1;
 			for (int y = 6; y > 0; y--) {
 				if (rows[y][x].getBall() == null && nullpoint == -1) {
 					nullpoint = y;
-					//System.out.println("SETTING NULLPOINT AT Y: " + nullpoint);
-				} else if (rows[y][x].getBall() != null && nullpoint != -1) {
-					System.out.println("MOVING BALL WITH NULLPOINT Y: " + nullpoint + "AND Y: " + y + " FINAL POS " + (6 - (nullpoint - y) / 2));
-					boardView.addRow(new Row(rows[y][x].getBall(), x, (6 -(nullpoint - y) / 2), this));
+					// System.out.println("SETTING NULLPOINT AT Y: " + nullpoint);
+				} else if (nullpoint != -1 && goDown == -1 && rows[y][x].getBall() != null) {
+					goDown = nullpoint - y;
+				}
+				if (rows[y][x].getBall() != null && nullpoint != -1) {
+					System.out.println("MOVING BALL WITH NULLPOINT Y: " + nullpoint + "AND Y: " + y + " FINAL POS "
+							+ (y + (nullpoint - y)));
+					boardView.addRow(new Row(rows[y][x].getBall(), x, y + goDown, this));
 					boardView.addRow(new Row(null, x, y, this));
 				}
 			}
 		}
-		
+
 		checkForDestroy();
 	}
 

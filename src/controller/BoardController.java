@@ -107,10 +107,27 @@ public class BoardController {
 			}
 		}
 		// System.out.println("Destroying all the balls!");
-		if (ballDestroy.size() == 0)
+		if (ballDestroy.size() == 0) {
 			return;
+		}
 		for (int i = 0; i < ballDestroy.size(); i++) {
 			if (ballDestroy.get(i).getBall().canBeDestroyed()) {
+				try {
+					rows[ballDestroy.get(i).getY() - 1][ballDestroy.get(i).getX()].getBall().breakBall();
+				} catch (Exception e) {
+				}
+				try {
+					rows[ballDestroy.get(i).getY() + 1][ballDestroy.get(i).getX()].getBall().breakBall();
+				} catch (Exception e) {
+				}
+				try {
+					rows[ballDestroy.get(i).getY()][ballDestroy.get(i).getX() - 1].getBall().breakBall();
+				} catch (Exception e) {
+				}
+				try {
+					rows[ballDestroy.get(i).getY()][ballDestroy.get(i).getX() + 1].getBall().breakBall();
+				} catch (Exception e) {
+				}
 				boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
 			}
 		}
@@ -135,6 +152,7 @@ public class BoardController {
 		}
 
 		checkForDestroy();
+		return;
 	}
 
 }

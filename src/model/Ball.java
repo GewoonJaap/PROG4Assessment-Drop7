@@ -11,7 +11,6 @@ public class Ball {
 	}
 
 	public String getImage() {
-		System.out.println(image);
 		return image;
 	}
 

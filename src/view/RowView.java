@@ -40,7 +40,6 @@ public class RowView extends BorderPane {
 	}
 
 	private void addBall() {
-		System.out.println("Adding a ball");
 		ballView = new BallView(row.getBall());
 		this.setCenter(ballView);
 

@@ -53,53 +53,76 @@ public class BoardController {
 		ArrayList<Row> ballDestroy = new ArrayList<Row>();
 		for (int y = 6; y > 0; y--) {
 			for (int x = 6; x > 0; x--) {
-				if (rows[y][x].getBall() != null) {
+				if (rows[y][x].getBall() != null && !rows[y][x].getBall().getImage().contains("full")
+						&& !rows[y][x].getBall().getImage().contains("half")) {
 					int ballValue = rows[y][x].getBall().getValue();
 					int ballsy = 0;
 					int ballsx = 0;
 					for (int by = y; by < 6; by++) {
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
+							// System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
+							// System.out.println("BREAK");
 							break;
 						}
 					}
 					for (int by = y; by > 0; by--) {
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
+							// System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
+							// System.out.println("BREAK");
 							break;
 						}
 					}
-					System.out.println("#" + y + " " + x + "Ball y: " + ballsy);
+					// System.out.println("#" + y + " " + x + "Ball y: " + ballsy);
 
 					for (int bx = x; bx < 6; bx++) {
 						if (rows[y][bx].getBall() != null) {
+							// System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
 						} else {
+							// System.out.println("BREAK");
 							break;
 						}
 					}
 					for (int bx = x; bx > 0; bx--) {
 						if (rows[y][bx].getBall() != null) {
+							// System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
 						} else {
+							// System.out.println("BREAK");
 							break;
 						}
 					}
-					System.out.println("#" + y + " " + x + "Ball x: " + ballsx);
 					if (ballsx == rows[y][x].getBall().getValue() || ballsy == rows[y][x].getBall().getValue()) {
-						System.out.println("We can destroy a ball! on Y: " + y + " X: " + x + " With value: "
-								+ rows[y][x].getBall().getValue());
+						// System.out.println("We can destroy a ball! on Y: " + y + " X: " + x + " With
+						// value: "
+						// + rows[y][x].getBall().getValue());
 						ballDestroy.add(rows[y][x]);
 					}
 
 				}
 			}
 		}
-		System.out.println("Destroying all the balls!");
+		// System.out.println("Destroying all the balls!");
 		for (int i = 0; i < ballDestroy.size(); i++) {
 			boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
+		}
+		rows = boardView.getRows();
+		for (int x = 0; x < 6; x++) {
+			int nullpoint = -1;
+			for (int y = 6; y > 0; y--) {
+				if (rows[y][x].getBall() == null && nullpoint == -1) {
+					nullpoint = y;
+					//System.out.println("SETTING NULLPOINT AT Y: " + nullpoint);
+				} else if (rows[y][x].getBall() != null && nullpoint != -1) {
+					System.out.println("MOVING BALL WITH NULLPOINT Y: " + nullpoint + "AND Y: " + y + " FINAL POS " + (6 - (nullpoint - y) / 2));
+					boardView.addRow(new Row(rows[y][x].getBall(), x, (6 -(nullpoint - y) / 2), this));
+					boardView.addRow(new Row(null, x, y, this));
+				}
+			}
 		}
 	}
 

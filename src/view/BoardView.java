@@ -52,7 +52,6 @@ public class BoardView extends BorderPane {
 
 	public void addRow(Row row) {
 		this.row[row.getY()][row.getX()] = row;
-		System.out.println("Adding row");
 		drawView(true);
 	}
 

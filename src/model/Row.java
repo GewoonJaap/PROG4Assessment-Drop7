@@ -14,6 +14,11 @@ public class Row {
 		this.ball = ball;
 		this.x = x;
 		this.y = y;
+		
+		if(y < 0 || y > 6 || x< 0 || x > 6) {
+			System.out.println("INVALID X/Y AXIS: X:" + x + " Y:" + y);
+			return;
+		}
 		this.boardController = boardController;
 	}
 

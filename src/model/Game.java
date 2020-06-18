@@ -10,7 +10,7 @@ public class Game {
 	private int level;
 	private Ball nextBall;
 	private int ballLeft;
-	private int BallLeft_START = 30;
+	private int BallLeft_START = 2;
 
 	public Game() {
 		score = 0;
@@ -65,6 +65,7 @@ public class Game {
 
 	public void resetBallLeft() {
 		ballLeft = BallLeft_START;
+		setNextBall();
 	}
 
 }

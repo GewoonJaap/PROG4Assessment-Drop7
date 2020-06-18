@@ -28,14 +28,6 @@ public class BoardController {
 		// System.out.println("Clicked row at: X: " + newRow.getX() + " Y:" +
 		// newRow.getY());
 		Row[][] rows = boardView.getRows();
-		if (gameView.getScoreController().getBallLeft() == 0) {
-			if (gameView.getGameController().getGame().getNextBall() != null) {
-				gameView.getGameController().getGame().setNextBallFixed(null);
-				gameView.getScoreController().updateScoreView();
-			}
-			System.out.println("OUT OF BALLS");
-			return;
-		}
 		for (int y = 6; y >= 0; y--) {
 			if (rows[y][newRow.getX()].getBall() == null) {
 				rows[y][newRow.getX()].setBall(gameView.getGameController().getGame().getNextBall());
@@ -46,6 +38,41 @@ public class BoardController {
 				break;
 			}
 		}
+		if (gameView.getScoreController().getBallLeft() <= -1) {
+			if (gameView.getGameController().getGame().getNextBall() != null) {
+				gameView.getGameController().getGame().setNextBallFixed(null);
+				gameView.getScoreController().updateScoreView();
+				// Check if game over because there is a ball at the top
+				for (int x = 0; x <= 6; x++) {
+					if (rows[0][x].getBall() != null) {
+						gameView.getGameController().showGameOver();
+						return;
+					}
+				}
+			}
+			System.out.println("OUT OF BALLS");
+			moveBallsup();
+			return;
+		}
+	}
+
+	private void moveBallsup() {
+		Row[][] rows = boardView.getRows();
+		for (int x = 0; x <= 6; x++) {
+			for (int y = 0; y <= 6; y++) {
+				if (rows[y][x].getBall() != null) {
+					boardView.addRow(new Row(rows[y][x].getBall(), x, y - 1, this));
+				}
+			}
+
+		}
+		rows = boardView.getRows();
+		for (int x = 0; x <= 6; x++) {
+			int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
+			boardView.addRow(new Row(new Ball(ballNr, "/resources/full.png"), x, 6, this));
+		}
+		gameView.getGameController().getGame().resetBallLeft();
+		gameView.getScoreController().updateScoreView();
 	}
 
 	private void checkForDestroy() {

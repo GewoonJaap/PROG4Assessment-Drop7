@@ -67,5 +67,8 @@ public class Game {
 		ballLeft = BallLeft_START;
 		setNextBall();
 	}
+	public void nextlevel() {
+		level++;
+	}
 
 }

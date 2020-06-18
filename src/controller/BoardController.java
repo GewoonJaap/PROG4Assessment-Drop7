@@ -34,7 +34,6 @@ public class BoardController {
 				boardView.addRow(rows[y][newRow.getX()]);
 				gameView.getGameController().getGame().setNextBall();
 				gameView.getScoreController().updateScoreView();
-				checkForDestroy();
 				break;
 			}
 		}
@@ -54,6 +53,7 @@ public class BoardController {
 			moveBallsup();
 			return;
 		}
+		checkForDestroy();
 	}
 
 	private void moveBallsup() {
@@ -72,6 +72,7 @@ public class BoardController {
 			boardView.addRow(new Row(new Ball(ballNr, "/resources/full.png"), x, 6, this));
 		}
 		gameView.getGameController().getGame().resetBallLeft();
+		gameView.getGameController().getGame().nextlevel();
 		gameView.getScoreController().updateScoreView();
 	}
 

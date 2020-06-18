@@ -60,7 +60,8 @@ public class BoardController {
 					int ballsx = 0;
 					//CHECK BALLS IN Y DOWN AND Y UP
 					//DOWN
-					for (int by = y; by < 6; by++) {
+					for (int by = rows[y][x].getY(); by < 6; by++) {
+						System.out.println("CHECKING DOWN Y: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
 							// System.out.println("Found a ball: Y:" + by + " X:" + x);
@@ -69,9 +70,9 @@ public class BoardController {
 							break;
 						}
 					}
-					System.out.println("BALLS y" + ballsy);
 					//UP
-					for (int by = y; by > 0; by--) {
+					for (int by = rows[y][x].getY(); by > 0; by--) {
+						System.out.println("CHECKING Y UP: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
 							System.out.println("Found a ball: Y:" + by + " X:" + x);
@@ -83,7 +84,7 @@ public class BoardController {
 					System.out.println("BALLS y" + ballsy);
 					// System.out.println("#" + y + " " + x + "Ball y: " + ballsy);
 
-					for (int bx = x; bx < 6; bx++) {
+					for (int bx = rows[y][x].getX(); bx < 6; bx++) {
 						if (rows[y][bx].getBall() != null) {
 							// System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
@@ -92,7 +93,7 @@ public class BoardController {
 							break;
 						}
 					}
-					for (int bx = x; bx > 0; bx--) {
+					for (int bx = rows[y][x].getX(); bx > 0; bx--) {
 						if (rows[y][bx].getBall() != null) {
 							// System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
@@ -157,7 +158,7 @@ public class BoardController {
 			}
 		}
 
-		// checkForDestroy();
+		checkForDestroy();
 		return;
 	}
 

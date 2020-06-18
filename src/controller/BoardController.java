@@ -58,6 +58,8 @@ public class BoardController {
 					int ballValue = rows[y][x].getBall().getValue();
 					int ballsy = 0;
 					int ballsx = 0;
+					//CHECK BALLS IN Y DOWN AND Y UP
+					//DOWN
 					for (int by = y; by < 6; by++) {
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
@@ -67,15 +69,18 @@ public class BoardController {
 							break;
 						}
 					}
+					System.out.println("BALLS y" + ballsy);
+					//UP
 					for (int by = y; by > 0; by--) {
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
 							System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
-							System.out.println("BREAK " + x);
+							System.out.println("BREAK");
 							break;
 						}
 					}
+					System.out.println("BALLS y" + ballsy);
 					// System.out.println("#" + y + " " + x + "Ball y: " + ballsy);
 
 					for (int bx = x; bx < 6; bx++) {
@@ -139,7 +144,8 @@ public class BoardController {
 				if (rows[y][x].getBall() == null && nullpoint == -1) {
 					nullpoint = y;
 					// System.out.println("SETTING NULLPOINT AT Y: " + nullpoint);
-				} else if (nullpoint != -1 && goDown == -1 && rows[y][x].getBall() != null) {
+				}
+				if (nullpoint != -1 && goDown == -1 && rows[y][x].getBall() != null) {
 					goDown = nullpoint - y;
 				}
 				if (rows[y][x].getBall() != null && nullpoint != -1) {

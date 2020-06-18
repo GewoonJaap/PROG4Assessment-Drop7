@@ -51,8 +51,8 @@ public class BoardController {
 	private void checkForDestroy() {
 		Row[][] rows = boardView.getRows();
 		ArrayList<Row> ballDestroy = new ArrayList<Row>();
-		for (int y = 6; y > 0; y--) {
-			for (int x = 6; x > 0; x--) {
+		for (int y = 6; y >= 0; y--) {
+			for (int x = 6; x >= 0; x--) {
 				if (rows[y][x].getBall() != null && !rows[y][x].getBall().getImage().contains("full")
 						&& !rows[y][x].getBall().getImage().contains("half")) {
 					int ballValue = rows[y][x].getBall().getValue();
@@ -70,9 +70,9 @@ public class BoardController {
 					for (int by = y; by > 0; by--) {
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
-							// System.out.println("Found a ball: Y:" + by + " X:" + x);
+							System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
-							// System.out.println("BREAK");
+							System.out.println("BREAK " + x);
 							break;
 						}
 					}
@@ -151,7 +151,7 @@ public class BoardController {
 			}
 		}
 
-		checkForDestroy();
+		// checkForDestroy();
 		return;
 	}
 

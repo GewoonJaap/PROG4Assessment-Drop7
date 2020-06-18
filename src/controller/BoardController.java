@@ -58,8 +58,8 @@ public class BoardController {
 					int ballValue = rows[y][x].getBall().getValue();
 					int ballsy = 0;
 					int ballsx = 0;
-					//CHECK BALLS IN Y DOWN AND Y UP
-					//DOWN
+					// CHECK BALLS IN Y DOWN AND Y UP
+					// DOWN
 					for (int by = rows[y][x].getY(); by < 6; by++) {
 						System.out.println("CHECKING DOWN Y: " + by);
 						if (rows[by][x].getBall() != null) {
@@ -70,7 +70,7 @@ public class BoardController {
 							break;
 						}
 					}
-					//UP
+					// UP
 					for (int by = rows[y][x].getY(); by > 0; by--) {
 						System.out.println("CHECKING Y UP: " + by);
 						if (rows[by][x].getBall() != null) {

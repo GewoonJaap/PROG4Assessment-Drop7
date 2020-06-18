@@ -107,6 +107,7 @@ public class BoardController {
 			}
 		}
 		// System.out.println("Destroying all the balls!");
+		if( ballDestroy.size() == 0) return;
 		for (int i = 0; i < ballDestroy.size(); i++) {
 			boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
 		}
@@ -124,6 +125,8 @@ public class BoardController {
 				}
 			}
 		}
+		
+		checkForDestroy();
 	}
 
 }

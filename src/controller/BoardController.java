@@ -24,10 +24,17 @@ public class BoardController {
 		boardView.addRow(row);
 	}
 
+	//
+	// CLICKED ROW, PLACE BALL
+	//
 	public void clickedRow(Row newRow) {
 		// System.out.println("Clicked row at: X: " + newRow.getX() + " Y:" +
 		// newRow.getY());
 		Row[][] rows = boardView.getRows();
+
+		//
+		// GET EMPTY ROW ON Y AXIS
+		//
 		for (int y = 6; y >= 0; y--) {
 			if (rows[y][newRow.getX()].getBall() == null) {
 				rows[y][newRow.getX()].setBall(gameView.getGameController().getGame().getNextBall());
@@ -37,9 +44,12 @@ public class BoardController {
 				break;
 			}
 		}
+
+		//
+		// OUT OF BALLS, NEXT ROUND
+		//
 		if (gameView.getScoreController().getBallLeft() <= -1) {
 			if (gameView.getGameController().getGame().getNextBall() != null) {
-				gameView.getGameController().getGame().setNextBallFixed(null);
 				gameView.getScoreController().updateScoreView();
 				// Check if game over because there is a ball at the top
 				for (int x = 0; x <= 6; x++) {
@@ -56,6 +66,9 @@ public class BoardController {
 		checkForDestroy();
 	}
 
+	//
+	// MOVE BALLSUP ONCE A NEW LEVEL STARTS
+	//
 	private void moveBallsup() {
 		Row[][] rows = boardView.getRows();
 		for (int x = 0; x <= 6; x++) {
@@ -144,6 +157,10 @@ public class BoardController {
 			}
 		}
 		// System.out.println("Destroying all the balls!");
+
+		//
+		// CHECK FOR GAME OVER IF THERE IS NO PLACE FOR A NEW BALL
+		//
 		if (ballDestroy.size() == 0) {
 			for (int x = 0; x <= 6; x++) {
 				if (rows[0][x].getBall() == null)
@@ -152,6 +169,10 @@ public class BoardController {
 			gameView.getGameController().showGameOver();
 			return;
 		}
+
+		//
+		// DESTROY BALL AROUND
+		//
 		for (int i = 0; i < ballDestroy.size(); i++) {
 			try {
 				rows[ballDestroy.get(i).getY() - 1][ballDestroy.get(i).getX()].getBall().breakBall();
@@ -174,6 +195,10 @@ public class BoardController {
 
 		}
 		rows = boardView.getRows();
+
+		//
+		// MOVE BALL DOWN
+		//
 		for (int x = 0; x < 6; x++) {
 			int nullpoint = -1;
 			int goDown = -1;
@@ -193,12 +218,28 @@ public class BoardController {
 				}
 			}
 		}
+
+		//
+		// RESET ballDestroy AGAINST STACK OVERFLOW
+		//
 		ballDestroy = null;
+
+		//
+		// CHECK IF THERE IS MORE TO DESTROY
+		//
 		checkForDestroy();
+
+		//
+		// EXIT THIS FUNCTION
+		//
 		return;
 	}
 
 	private void updateScore() {
+
+		//
+		// UPDATE SCORE ONCE A BALL GETS REMOVE
+		//
 		gameView.getGameController().getGame().addToScore(10);
 		boolean emptyfield = true;
 		for (int x = 0; x <= 6; x++) {
@@ -208,6 +249,10 @@ public class BoardController {
 				break;
 			}
 		}
+
+		//
+		// CHECK IF FIELD IS EMPTY TO ADD 100 POINTS
+		//
 		if (emptyfield) {
 			gameView.getGameController().getGame().addToScore(100);
 			gameView.getScoreController().updateScoreView();

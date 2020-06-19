@@ -11,17 +11,17 @@ public class GameController extends Thread {
 	private Stage main;
 	private Game game;
 	private Thread t;
-	private boolean loop = false;
+	private boolean loop = true;
 	private int LOOP_TIME = 2000;
 
 	public GameController(Stage main) {
 		this.main = main;
 		this.game = new Game();
-		gameView = new GameView(this);
 		startGame();
 	}
 
 	private void startGame() {
+		gameView = new GameView(this);
 		this.start();
 	}
 

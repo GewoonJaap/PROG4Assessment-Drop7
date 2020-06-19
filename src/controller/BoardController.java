@@ -146,7 +146,7 @@ public class BoardController {
 						}
 					}
 					System.out.println("BALLS x" + ballsx);
-					if (ballsx == rows[y][x].getBall().getValue() || ballsy == rows[y][x].getBall().getValue()) {
+					if (ballsx == ballValue || ballsy == ballValue) {
 //						 System.out.println("We can destroy a ball! on Y: " + y + " X: " + x + " With
 //						 value: "
 //						 + rows[y][x].getBall().getValue());
@@ -191,7 +191,7 @@ public class BoardController {
 			} catch (Exception e) {
 			}
 			boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
-			updateScore();
+			updateScore(ballDestroy.get(i).getBall().getValue());
 
 		}
 		rows = boardView.getRows();
@@ -235,12 +235,12 @@ public class BoardController {
 		return;
 	}
 
-	private void updateScore() {
+	private void updateScore(int points) {
 
 		//
 		// UPDATE SCORE ONCE A BALL GETS REMOVE
 		//
-		gameView.getGameController().getGame().addToScore(10);
+		gameView.getGameController().getGame().addToScore(points);
 		boolean emptyfield = true;
 		for (int x = 0; x <= 6; x++) {
 			Row[][] rows = boardView.getRows();

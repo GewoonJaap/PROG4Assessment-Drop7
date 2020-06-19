@@ -2,7 +2,6 @@ package model;
 
 import java.util.Random;
 
-import view.BallView;
 
 public class Game {
 

@@ -2,7 +2,6 @@ package model;
 
 import java.util.Random;
 
-
 public class Game {
 
 	private int score;
@@ -10,6 +9,8 @@ public class Game {
 	private Ball nextBall;
 	private int ballLeft;
 	private int BallLeft_START = 30;
+	private int fieldSizeX = 6; // Use FieldSize -1
+	private int fieldSizeY = 6; // Use FieldSize -1
 
 	public Game() {
 		score = 0;
@@ -69,6 +70,14 @@ public class Game {
 
 	public void nextlevel() {
 		level++;
+	}
+
+	public int getFieldSizeX() {
+		return fieldSizeX;
+	}
+
+	public int getFieldSizeY() {
+		return fieldSizeY;
 	}
 
 }

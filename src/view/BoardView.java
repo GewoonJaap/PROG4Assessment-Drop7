@@ -15,13 +15,16 @@ public class BoardView extends BorderPane {
 
 	private RowView[][] rowView;
 	private Row[][] row;
-	private int ROWS_Y = 7;
-	private int ROWS_X = 7;
+	private int ROWS_Y;
+	private int ROWS_X;
+	private double SQUARE_SPACING = 1.0;
 	private BoardController boardController;
 
 	public BoardView(BoardController boardController) {
 		boardController.setBoardView(this);
 		this.boardController = boardController;
+		ROWS_X = boardController.getGame().getFieldSizeX() + 1;
+		ROWS_Y = boardController.getGame().getFieldSizeY() + 1;
 		this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		drawView(false);
 	}
@@ -33,9 +36,9 @@ public class BoardView extends BorderPane {
 			row = new Row[ROWS_Y][ROWS_X];
 		}
 
-		VBox vBox = new VBox(1.0);
+		VBox vBox = new VBox(SQUARE_SPACING);
 		for (int y = 0; y < ROWS_Y; y++) {
-			HBox hbox = new HBox(1.0);
+			HBox hbox = new HBox(SQUARE_SPACING);
 
 			for (int x = 0; x < ROWS_X; x++) {
 				Row newRow = new Row(null, x, y, boardController);

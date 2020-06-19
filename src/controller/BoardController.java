@@ -98,21 +98,32 @@ public class BoardController {
 							break;
 						}
 					}
+					System.out.println("BALLS y" + ballsy);
 					// UP
 					for (int by = rows[y][x].getY(); by > 0; by--) {
 						System.out.println("CHECKING Y UP: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
-							System.out.println("Found a ball: Y:" + by + " X:" + x);
+							//System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
-							System.out.println("BREAK");
+							//System.out.println("BREAK");
 							break;
 						}
 					}
+					
 					System.out.println("BALLS y" + ballsy);
-					// System.out.println("#" + y + " " + x + "Ball y: " + ballsy);
 
-					for (int bx = rows[y][x].getX(); bx < 6; bx++) {
+					for (int bx = rows[y][x].getX(); bx <= 6; bx++) {
+						if (rows[y][bx].getBall() != null) {
+							 //System.out.println("Found a ball: Y:" + y + " X:" + bx);
+							ballsx++;
+						} else {
+							// System.out.println("BREAK");
+							break;
+						}
+					}
+					System.out.println("BALLS x" + ballsx);
+					for (int bx = rows[y][x].getX() -1; bx >= 0; bx--) {
 						if (rows[y][bx].getBall() != null) {
 							// System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
@@ -121,15 +132,7 @@ public class BoardController {
 							break;
 						}
 					}
-					for (int bx = rows[y][x].getX(); bx > 0; bx--) {
-						if (rows[y][bx].getBall() != null) {
-							// System.out.println("Found a ball: Y:" + y + " X:" + bx);
-							ballsx++;
-						} else {
-							// System.out.println("BREAK");
-							break;
-						}
-					}
+					System.out.println("BALLS x" + ballsx);
 					if (ballsx == rows[y][x].getBall().getValue() || ballsy == rows[y][x].getBall().getValue()) {
 						// System.out.println("We can destroy a ball! on Y: " + y + " X: " + x + " With
 						// value: "

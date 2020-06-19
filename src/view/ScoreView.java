@@ -14,6 +14,7 @@ public class ScoreView extends BorderPane {
 	private Label ballLeft;
 	private BallView nextBall;
 	private VBox vBox;
+	private double vBox_SPACING = 3.0;
 
 	public ScoreView(ScoreController scoreController) {
 		this.scoreController = scoreController;
@@ -29,7 +30,7 @@ public class ScoreView extends BorderPane {
 		if (scoreController.getNextBall() != null) {
 			nextBall = new BallView(scoreController.getNextBall());
 		}
-		vBox = new VBox(3.0);
+		vBox = new VBox(vBox_SPACING);
 		if (scoreController.getNextBall() == null) {
 			vBox.getChildren().addAll(score, level, ballLeft);
 		} else {

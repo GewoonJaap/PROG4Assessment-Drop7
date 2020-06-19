@@ -13,11 +13,13 @@ public class RowView extends BorderPane {
 
 	private Row row;
 	private BallView ballView;
-	private int WIDTH = 64;
-	private int HEIGHT = 64;
+	private int WIDTH;
+	private int HEIGHT;
 
 	public RowView(Row row) {
 		this.row = row;
+		this.WIDTH = row.getBoardController().getGame().getRowSizeX();
+		this.HEIGHT = row.getBoardController().getGame().getRowSizeY();
 		drawView();
 		this.setOnMouseClicked(e -> row.getBoardController().clickedRow(row));
 	}

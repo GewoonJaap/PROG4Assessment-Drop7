@@ -11,6 +11,9 @@ public class Game {
 	private int BallLeft_START = 30;
 	private int fieldSizeX = 6; // Use FieldSize -1
 	private int fieldSizeY = 6; // Use FieldSize -1
+	private int rowSizeX = 64;
+	private int rowSizeY = 64;
+	private double fullBallChance = 0.25;
 
 	public Game() {
 		score = 0;
@@ -24,7 +27,7 @@ public class Game {
 		int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
 		Random random = new Random();
 		// 25% chance for a full ball
-		if ((random.nextInt(4) == 0)) {
+		if ((random.nextInt((int) (1/fullBallChance)) == 0)) {
 			nextBall = new Ball(ballNr, "/resources/full.png");
 			return;
 		}
@@ -78,6 +81,14 @@ public class Game {
 
 	public int getFieldSizeY() {
 		return fieldSizeY;
+	}
+
+	public int getRowSizeX() {
+		return rowSizeX;
+	}
+
+	public int getRowSizeY() {
+		return rowSizeY;
 	}
 
 }

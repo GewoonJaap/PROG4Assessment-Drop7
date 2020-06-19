@@ -145,6 +145,11 @@ public class BoardController {
 		}
 		// System.out.println("Destroying all the balls!");
 		if (ballDestroy.size() == 0) {
+			for (int x = 0; x <= 6; x++) {
+				if (rows[0][x].getBall() == null)
+					return;
+			}
+			gameView.getGameController().showGameOver();
 			return;
 		}
 		for (int i = 0; i < ballDestroy.size(); i++) {

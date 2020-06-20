@@ -224,7 +224,7 @@ public class BoardController {
 		//
 		return;
 	}
-	
+
 	private void moveBallsDown() {
 		Row[][] rows = boardView.getRows();
 		for (int x = 0; x <= fieldSizeX; x++) {

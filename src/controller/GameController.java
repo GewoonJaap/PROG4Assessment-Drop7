@@ -11,7 +11,7 @@ public class GameController extends Thread {
 	private Stage main;
 	private Game game;
 	private Thread t;
-	private boolean loop = true;
+	private boolean loop = false;
 	private int LOOP_TIME = 2000;
 
 	public GameController(Stage main) {
@@ -60,7 +60,7 @@ public class GameController extends Thread {
 	}
 
 	public void start() {
-		if (t == null) {
+		if (t == null && loop) {
 			t = new Thread(this);
 			t.start();
 		}

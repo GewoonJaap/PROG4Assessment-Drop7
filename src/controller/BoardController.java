@@ -170,8 +170,10 @@ public class BoardController {
 		//
 		if (ballDestroy.size() == 0) {
 			for (int x = 0; x <= fieldSizeX; x++) {
-				if (rows[0][x].getBall() == null)
+				if (rows[0][x].getBall() == null) {
+					moveBallsDown();
 					return;
+				}
 			}
 			gameView.getGameController().showGameOver();
 			return;
@@ -201,15 +203,34 @@ public class BoardController {
 			updateScore(ballDestroy.get(i).getBall().getValue());
 
 		}
-		rows = boardView.getRows();
 
 		//
 		// MOVE BALL DOWN
 		//
-		for (int x = 0; x < fieldSizeX; x++) {
+
+		moveBallsDown();
+		//
+		// RESET ballDestroy AGAINST STACK OVERFLOW
+		//
+		ballDestroy = null;
+
+		//
+		// CHECK IF THERE IS MORE TO DESTROY
+		//
+		checkForDestroy();
+
+		//
+		// EXIT THIS FUNCTION
+		//
+		return;
+	}
+	
+	private void moveBallsDown() {
+		Row[][] rows = boardView.getRows();
+		for (int x = 0; x <= fieldSizeX; x++) {
 			int nullpoint = -1;
 			int goDown = -1;
-			for (int y = fieldSizeY; y > 0; y--) {
+			for (int y = fieldSizeY; y >= 0; y--) {
 				if (rows[y][x].getBall() == null && nullpoint == -1) {
 					nullpoint = y;
 					// System.out.println("SETTING NULLPOINT AT Y: " + nullpoint);
@@ -225,21 +246,6 @@ public class BoardController {
 				}
 			}
 		}
-
-		//
-		// RESET ballDestroy AGAINST STACK OVERFLOW
-		//
-		ballDestroy = null;
-
-		//
-		// CHECK IF THERE IS MORE TO DESTROY
-		//
-		checkForDestroy();
-
-		//
-		// EXIT THIS FUNCTION
-		//
-		return;
 	}
 
 	private void updateScore(int points) {

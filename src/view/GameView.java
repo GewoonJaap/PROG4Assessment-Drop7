@@ -4,6 +4,8 @@ import controller.BoardController;
 import controller.GameController;
 import controller.ScoreController;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -49,7 +51,16 @@ public class GameView extends BorderPane {
 	public void showGameOver() {
 		this.getChildren().clear();
 		Label gameOver = new Label("GAME OVER");
-		this.setCenter(gameOver);
+		Label score = new Label("SCORE: " + Integer.toString(gameController.getGame().getScore()));
+		Label level = new Label("LEVEL: " + Integer.toString(gameController.getGame().getLevel()));
+		Button restart = new Button("Restart game");
+		restart.setOnMouseClicked(e -> scoreController.getGameView().getGameController().loadGame());
+		VBox vbox = new VBox(10.0);
+		vbox.setAlignment(Pos.CENTER);
+		vbox.getChildren().addAll(gameOver, score, level, restart);
+		vbox.setMinWidth(WINDOW_WIDTH);
+		vbox.setMinHeight(WINDOW_HEIGHT);
+		this.setCenter(vbox);
 	}
 
 	public GameController getGameController() {

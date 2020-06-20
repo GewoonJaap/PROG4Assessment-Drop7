@@ -28,7 +28,9 @@ public class ScoreView extends BorderPane {
 		score = new Label("Score: " + Integer.toString(scoreController.getScore()));
 		level = new Label("Level: " + Integer.toString(scoreController.getLevel()));
 		ballLeft = new Label("Balls left: " + Integer.toString(scoreController.getBallLeft()));
-		cheatmode = new Label("Cheat mode enabled: " +Boolean.toString(scoreController.getGameView().getGameController().cheatmodeActivated()) + " Press C to toggle");
+		cheatmode = new Label("Cheat mode enabled: "
+				+ Boolean.toString(scoreController.getGameView().getGameController().cheatmodeActivated())
+				+ " Press C to toggle");
 		if (scoreController.getNextBall() != null) {
 			nextBall = new BallView(scoreController.getNextBall());
 		}

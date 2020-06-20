@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -20,12 +21,16 @@ public class GameController extends Thread {
 
 	public GameController(Stage main) {
 		this.main = main;
-		this.game = new Game();
 		loadGame();
 	}
 
-	private void loadGame() {
+	public void loadGame() {
+		this.game = new Game();
 		gameView = new GameView(this);
+		if (main.getScene() != null) {
+			main.setScene(new Scene(gameView, 720, 720));
+			ready();
+		}
 	}
 
 	public void ready() {
@@ -37,23 +42,17 @@ public class GameController extends Thread {
 			} else if (cheatmode) {
 				if (e.getCode() == KeyCode.DIGIT1) {
 					game.setNextBallFixed(new Ball(1, "/resources/1.png"));
-				}
-				else if (e.getCode() == KeyCode.DIGIT2) {
+				} else if (e.getCode() == KeyCode.DIGIT2) {
 					game.setNextBallFixed(new Ball(2, "/resources/2.png"));
-				}
-				else if (e.getCode() == KeyCode.DIGIT3) {
+				} else if (e.getCode() == KeyCode.DIGIT3) {
 					game.setNextBallFixed(new Ball(3, "/resources/3.png"));
-				}
-				else if (e.getCode() == KeyCode.DIGIT4) {
+				} else if (e.getCode() == KeyCode.DIGIT4) {
 					game.setNextBallFixed(new Ball(4, "/resources/4.png"));
-				}
-				else if (e.getCode() == KeyCode.DIGIT5) {
+				} else if (e.getCode() == KeyCode.DIGIT5) {
 					game.setNextBallFixed(new Ball(5, "/resources/5.png"));
-				}
-				else if (e.getCode() == KeyCode.DIGIT6) {
+				} else if (e.getCode() == KeyCode.DIGIT6) {
 					game.setNextBallFixed(new Ball(6, "/resources/6.png"));
-				}
-				else if (e.getCode() == KeyCode.DIGIT7) {
+				} else if (e.getCode() == KeyCode.DIGIT7) {
 					game.setNextBallFixed(new Ball(7, "/resources/7.png"));
 				}
 				gameView.getScoreController().updateScoreView();

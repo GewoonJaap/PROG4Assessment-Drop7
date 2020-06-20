@@ -18,6 +18,7 @@ public class Main extends Application {
 		stage.setTitle("PROG ASS – Drop7 - Jaap Rodenburg");
 		stage.setResizable(false);
 		stage.show();
+		gameController.ready();
 
 	}
 

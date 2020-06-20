@@ -108,7 +108,7 @@ public class BoardController {
 					int ballsx = 0;
 //					 CHECK BALLS IN Y DOWN AND Y UP
 //					 DOWN
-					for (int by = rows[y][x].getY(); by < fieldSizeY; by++) {
+					for (int by = rows[y][x].getY(); by <= fieldSizeY; by++) {
 						System.out.println("CHECKING DOWN Y: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
@@ -120,7 +120,7 @@ public class BoardController {
 					}
 //					System.out.println("BALLS y" + ballsy);
 					// UP
-					for (int by = rows[y][x].getY(); by > 0; by--) {
+					for (int by = rows[y][x].getY() - 1; by >= 0; by--) {
 //						System.out.println("CHECKING Y UP: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;

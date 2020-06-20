@@ -31,6 +31,7 @@ public class GameView extends BorderPane {
 
 	private void drawView() {
 		this.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		getStylesheets().add(this.getClass().getResource("/resources/core.css").toExternalForm());
 		this.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		VBox vBox = new VBox(25.0);
 		vBox.setMinSize(WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5);
@@ -51,10 +52,14 @@ public class GameView extends BorderPane {
 	public void showGameOver() {
 		this.getChildren().clear();
 		Label gameOver = new Label("GAME OVER");
+		gameOver.getStyleClass().add("basicText");
 		Label score = new Label("SCORE: " + Integer.toString(gameController.getGame().getScore()));
+		score.getStyleClass().add("basicText");
 		Label level = new Label("LEVEL: " + Integer.toString(gameController.getGame().getLevel()));
+		level.getStyleClass().add("basicText");
 		Button restart = new Button("Restart game");
 		restart.setOnMouseClicked(e -> scoreController.getGameView().getGameController().loadGame());
+		restart.getStyleClass().add("gameoverBTN");
 		VBox vbox = new VBox(10.0);
 		vbox.setAlignment(Pos.CENTER);
 		vbox.getChildren().addAll(gameOver, score, level, restart);

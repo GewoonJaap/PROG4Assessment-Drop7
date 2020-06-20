@@ -1,0 +1,13 @@
+.gameoverBTN {
+	-fx-text-fill: white;
+	-fx-background-color: #303030;
+	-fx-font-family: "Arial";
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-padding: 6 0; 
+}
+.basicText{
+	-fx-text-fill: white;
+	-fx-font-family: "Arial";
+	-fx-font-size: 20;
+}

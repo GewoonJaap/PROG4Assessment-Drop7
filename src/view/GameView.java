@@ -58,8 +58,6 @@ public class GameView extends BorderPane {
 		VBox vbox = new VBox(10.0);
 		vbox.setAlignment(Pos.CENTER);
 		vbox.getChildren().addAll(gameOver, score, level, restart);
-		vbox.setMinWidth(WINDOW_WIDTH);
-		vbox.setMinHeight(WINDOW_HEIGHT);
 		this.setCenter(vbox);
 	}
 

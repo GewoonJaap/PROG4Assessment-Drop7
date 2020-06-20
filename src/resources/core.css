@@ -13,5 +13,6 @@
 	-fx-dropshadow: gaussian, black, 10, 10, 5, 5
 }
 .background {
--fx-background-color: linear-gradient(to bottom, #ff7f50, #6a5acd);
+    -gradient-base: #ff7f50;
+    -fx-background-color: linear-gradient(to bottom, -gradient-base, #6a5acd);
 }

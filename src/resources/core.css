@@ -4,15 +4,17 @@
 	-fx-font-family: "Arial";
 	-fx-font-size: 20;
 	-fx-font-weight: bold;
-	-fx-margin: 10 10; 
+ 	
 }
 .basicText{
 	-fx-text-fill: white;
-	-fx-font-family: "Arial";
 	-fx-font-size: 20;
-	-fx-dropshadow: gaussian, black, 10, 10, 5, 5
+	-fx-effect: dropshadow( one-pass-box , black , 1 , 0.5 , -1 , 1 );
+}
+.gameover{
+-fx-font-size: 48;
 }
 .background {
-    -gradient-base: #ff7f50;
-    -fx-background-color: linear-gradient(to bottom, -gradient-base, #6a5acd);
+-fx-background-color: linear-gradient(to bottom, #ff7f50, #6a5acd);
 }
+

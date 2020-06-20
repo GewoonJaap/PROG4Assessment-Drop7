@@ -33,10 +33,9 @@ public class GameView extends BorderPane {
 	}
 
 	private void drawView() {
-		//this.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+	
 		getStylesheets().add(this.getClass().getResource("/resources/core.css").toExternalForm());
 		this.getStyleClass().add("background");
-		drawBackground();
 		this.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		VBox vBox = new VBox(25.0);
 		vBox.setMinSize(WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5);
@@ -55,31 +54,12 @@ public class GameView extends BorderPane {
 
 	}
 	
-	private void drawBackground() {
-        ObjectProperty<Color> baseColor = new SimpleObjectProperty<>();
-
-        KeyValue keyValue1 = new KeyValue(baseColor, Color.rgb(255, 127, 80));
-        KeyValue keyValue2 = new KeyValue(baseColor, Color.rgb(106, 90, 205));
-        KeyFrame keyFrame1 = new KeyFrame(Duration.ZERO, keyValue1);
-        KeyFrame keyFrame2 = new KeyFrame(Duration.millis(2500), keyValue2);
-        Timeline timeline = new Timeline(keyFrame1, keyFrame2);
-
-        baseColor.addListener((obs, oldColor, newColor) -> {
-            this.setStyle(String.format("-gradient-base: #%02x%02x%02x; ", 
-                    (int)(newColor.getRed()*255),
-                    (int)(newColor.getGreen()*255),
-                    (int)(newColor.getBlue()*255)));
-        });
-
-        timeline.setAutoReverse(true);
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-	}
 
 	public void showGameOver() {
 		this.getChildren().clear();
 		Label gameOver = new Label("GAME OVER");
 		gameOver.getStyleClass().add("basicText");
+		gameOver.getStyleClass().add("gameover");
 		Label score = new Label("SCORE: " + Integer.toString(gameController.getGame().getScore()));
 		score.getStyleClass().add("basicText");
 		Label level = new Label("LEVEL: " + Integer.toString(gameController.getGame().getLevel()));

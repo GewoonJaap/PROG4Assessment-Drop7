@@ -4,10 +4,11 @@
 	-fx-font-family: "Arial";
 	-fx-font-size: 20;
 	-fx-font-weight: bold;
-	-fx-padding: 6 0; 
+	-fx-margin: 10 10; 
 }
 .basicText{
 	-fx-text-fill: white;
 	-fx-font-family: "Arial";
 	-fx-font-size: 20;
+	-fx-dropshadow: gaussian, black, 10, 10, 5, 5
 }

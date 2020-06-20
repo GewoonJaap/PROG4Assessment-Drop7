@@ -1,6 +1,7 @@
 package view;
 
 import controller.ScoreController;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -25,12 +26,17 @@ public class ScoreView extends BorderPane {
 
 	public void createView() {
 		this.getChildren().clear();
+		getStylesheets().add(this.getClass().getResource("/resources/core.css").toExternalForm());
 		score = new Label("Score: " + Integer.toString(scoreController.getScore()));
+		score.getStyleClass().add("basicText");
 		level = new Label("Level: " + Integer.toString(scoreController.getLevel()));
+		level.getStyleClass().add("basicText");
 		ballLeft = new Label("Balls left: " + Integer.toString(scoreController.getBallLeft()));
+		ballLeft.getStyleClass().add("basicText");
 		cheatmode = new Label("Cheat mode enabled: "
 				+ Boolean.toString(scoreController.getGameView().getGameController().cheatmodeActivated())
 				+ " Press C to toggle");
+		cheatmode.getStyleClass().add("basicText");
 		if (scoreController.getNextBall() != null) {
 			nextBall = new BallView(scoreController.getNextBall());
 		}
@@ -40,6 +46,7 @@ public class ScoreView extends BorderPane {
 		} else {
 			vBox.getChildren().addAll(score, level, ballLeft, cheatmode, nextBall);
 		}
+		vBox.setAlignment(Pos.CENTER);
 		this.setCenter(vBox);
 
 	}

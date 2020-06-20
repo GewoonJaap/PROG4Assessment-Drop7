@@ -12,3 +12,6 @@
 	-fx-font-size: 20;
 	-fx-dropshadow: gaussian, black, 10, 10, 5, 5
 }
+.background {
+-fx-background-color: linear-gradient(to bottom, #ff7f50, #6a5acd);
+}

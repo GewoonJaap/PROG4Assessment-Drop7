@@ -30,8 +30,9 @@ public class GameView extends BorderPane {
 	}
 
 	private void drawView() {
-		this.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		//this.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		getStylesheets().add(this.getClass().getResource("/resources/core.css").toExternalForm());
+		this.getStyleClass().add("background");
 		this.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		VBox vBox = new VBox(25.0);
 		vBox.setMinSize(WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5);

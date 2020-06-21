@@ -71,6 +71,7 @@ public class BoardController {
 			return;
 		}
 		checkForDestroy();
+		gameView.getGameController().resetTimer();
 	}
 
 	//

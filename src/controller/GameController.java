@@ -15,8 +15,9 @@ public class GameController extends Thread {
 	private Stage main;
 	private Game game;
 	private Thread t;
-	private boolean loop = false;
+	private boolean loop = true;
 	private int LOOP_TIME = 2000;
+	private int CURRENT_LOOP_TIME;
 	private boolean cheatmode = false;
 
 	public GameController(Stage main) {
@@ -25,6 +26,10 @@ public class GameController extends Thread {
 	}
 
 	public void loadGame() {
+		game = null;
+		gameView = null;
+		t = null;
+		CURRENT_LOOP_TIME = 0;
 		this.game = new Game();
 		gameView = new GameView(this);
 		if (main.getScene() != null) {
@@ -73,21 +78,23 @@ public class GameController extends Thread {
 	}
 
 	public void run() {
-		while (loop) {
-			int ballLeftSave = game.getBallLeft();
+		while (loop && !interrupted()) {
 			System.out.println("Loop");
 			try {
-				Thread.sleep(LOOP_TIME);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if (game.getBallLeft() == ballLeftSave) {
+			CURRENT_LOOP_TIME += 100;
+			if(CURRENT_LOOP_TIME >= LOOP_TIME) {
 				System.out.println("Game OVER");
+				boolean restartloop = loop;
 				loop = false;
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
 						showGameOver();
+						loop = restartloop;
 					}
 				});
 			}
@@ -99,10 +106,17 @@ public class GameController extends Thread {
 	}
 
 	public void start() {
+		System.out.println("start");
+		CURRENT_LOOP_TIME = 0;
 		if (t == null && loop) {
 			t = new Thread(this);
 			t.start();
+
 		}
+		
+	}
+	public void resetTimer() {
+		CURRENT_LOOP_TIME = 0;
 	}
 
 }

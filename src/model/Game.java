@@ -24,7 +24,7 @@ public class Game {
 
 	public void setNextBall() {
 		removeBallLeft();
-		int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
+		int ballNr = (int) Math.floor(Math.random() * (1 - 8) + 8);
 		Random random = new Random();
 		// 25% chance for a full ball
 		if ((random.nextInt((int) (1/fullBallChance)) == 0)) {

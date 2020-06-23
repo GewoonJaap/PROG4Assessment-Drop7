@@ -25,16 +25,16 @@ public class GameView extends BorderPane {
 	}
 
 	private void drawView() {
-	
+		// Create the game view
 		getStylesheets().add(this.getClass().getResource("/resources/core.css").toExternalForm());
 		this.getStyleClass().add("background");
 		this.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		VBox vBox = new VBox(25.0);
 		vBox.setMinSize(WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5);
-
+		// Add the scoreView
 		scoreController = new ScoreController(this);
 		scoreView = new ScoreView(scoreController);
-
+		// Add the board
 		boardController = new BoardController(this);
 		boardView = new BoardView(boardController);
 		int sizeX = (gameController.getGame().getFieldSizeX() + 1 * gameController.getGame().getRowSizeX());
@@ -45,16 +45,16 @@ public class GameView extends BorderPane {
 		this.setCenter(vBox);
 
 	}
-	
 
 	public void showGameOver() {
+		// Game over, empty the view and show gameover screen
 		this.getChildren().clear();
 		Label gameOver = new Label("GAME OVER");
 		gameOver.getStyleClass().add("basicText");
 		gameOver.getStyleClass().add("gameover");
-		Label score = new Label("SCORE: " + Integer.toString(gameController.getGame().getScore()));
+		Label score = new Label("SCORE: " + Integer.toString(scoreController.getScore()));
 		score.getStyleClass().add("basicText");
-		Label level = new Label("LEVEL: " + Integer.toString(gameController.getGame().getLevel()));
+		Label level = new Label("LEVEL: " + Integer.toString(scoreController.getLevel()));
 		level.getStyleClass().add("basicText");
 		Button restart = new Button("Restart game");
 		restart.setOnMouseClicked(e -> scoreController.getGameView().getGameController().loadGame());

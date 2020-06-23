@@ -10,6 +10,8 @@ public class Ball {
 		this.value = value;
 		this.image = image;
 		if (image.contains("half") || image.contains("full")) {
+			// If a ball is half or full, it can't be destroyed if the ball value matches
+			// the amount of balls around it. It needs to break first.
 			canDestroyed = false;
 		} else {
 			canDestroyed = true;
@@ -33,6 +35,7 @@ public class Ball {
 	}
 
 	public void breakBall() {
+		//Break ball if possible
 		if (image.contains("full")) {
 			image = "/resources/half.png";
 		} else if (image.contains("half")) {

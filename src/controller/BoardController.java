@@ -64,7 +64,7 @@ public class BoardController {
 		if (gameView.getScoreController().getBallLeft() <= -1) {
 			if (gameView.getGameController().getGame().getNextBall() != null) {
 				gameView.getScoreController().updateScoreView();
-				// Check if game over because there is a ball at the top
+				// Check if gameover because there is a ball at the top
 				for (int x = 0; x <= fieldSizeX; x++) {
 					if (rows[0][x].getBall() != null) {
 						gameView.getGameController().showGameOver();
@@ -93,6 +93,7 @@ public class BoardController {
 			}
 
 		}
+		// Add new balls to the button
 		rows = game.getRows();
 		for (int x = 0; x <= fieldSizeX; x++) {
 			int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
@@ -119,58 +120,44 @@ public class BoardController {
 						System.out.println("CHECKING DOWN Y: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
-//							 System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
-//							 System.out.println("BREAK");
 							break;
 						}
 					}
-//					System.out.println("BALLS y" + ballsy);
 					// UP
 					for (int by = rows[y][x].getY() - 1; by >= 0; by--) {
-//						System.out.println("CHECKING Y UP: " + by);
 						if (rows[by][x].getBall() != null) {
 							ballsy++;
-//							System.out.println("Found a ball: Y:" + by + " X:" + x);
 						} else {
-//							System.out.println("BREAK");
 							break;
 						}
 					}
 
-//					System.out.println("BALLS y" + ballsy);
-
+					// X Axis Right
 					for (int bx = rows[y][x].getX(); bx <= fieldSizeX; bx++) {
 						if (rows[y][bx].getBall() != null) {
-//							 System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
 						} else {
-//							 System.out.println("BREAK");
 							break;
 						}
 					}
-//					System.out.println("BALLS x" + ballsx);
+					// X Axis Left
 					for (int bx = rows[y][x].getX() - 1; bx >= 0; bx--) {
 						if (rows[y][bx].getBall() != null) {
-//							 System.out.println("Found a ball: Y:" + y + " X:" + bx);
 							ballsx++;
 						} else {
-//							 System.out.println("BREAK");
 							break;
 						}
 					}
-					System.out.println("BALLS x" + ballsx);
+
 					if (ballsx == ballValue || ballsy == ballValue) {
-//						 System.out.println("We can destroy a ball! on Y: " + y + " X: " + x + " With
-//						 value: "
-//						 + rows[y][x].getBall().getValue());
+						// Check if ball matches rule to destroy it
 						ballDestroy.add(rows[y][x]);
 					}
 
 				}
 			}
 		}
-		// System.out.println("Destroying all the balls!");
 
 		//
 		// CHECK FOR GAME OVER IF THERE IS NO PLACE FOR A NEW BALL
@@ -187,7 +174,7 @@ public class BoardController {
 		}
 
 		//
-		// DESTROY BALL AROUND
+		// BREAK BALLS AROUND
 		//
 		for (int i = 0; i < ballDestroy.size(); i++) {
 			try {
@@ -206,14 +193,14 @@ public class BoardController {
 				rows[ballDestroy.get(i).getY()][ballDestroy.get(i).getX() + 1].getBall().breakBall();
 			} catch (Exception e) {
 			}
-
+			// Remove ball to destroy from the field.
 			addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
 			updateScore(ballDestroy.get(i).getBall().getValue());
 
 		}
 
 		//
-		// MOVE BALL DOWN
+		// Let balls fall down after destroy
 		//
 
 		moveBallsDown();
@@ -241,16 +228,18 @@ public class BoardController {
 			for (int y = fieldSizeY; y >= 0; y--) {
 				if (rows[y][x].getBall() == null && nullpoint == -1) {
 					nullpoint = y;
-					// System.out.println("SETTING NULLPOINT AT Y: " + nullpoint);
+					// Setting the "nullpoint", a point where there is no ball on the field.
 				}
 				if (nullpoint != -1 && goDown == -1 && rows[y][x].getBall() != null) {
 					goDown = nullpoint - y;
+					// Calculate the amount of fields a ball should go down
 				}
 				if (rows[y][x].getBall() != null && nullpoint != -1) {
 					System.out.println("MOVING BALL WITH NULLPOINT Y: " + nullpoint + "AND Y: " + y + " FINAL POS "
 							+ (y + (nullpoint - y)));
 					addRow(new Row(rows[y][x].getBall(), x, y + goDown, this));
 					addRow(new Row(null, x, y, this));
+					// Move ball down, and empty old row.
 				}
 			}
 		}
@@ -259,10 +248,11 @@ public class BoardController {
 	private void updateScore(int points) {
 
 		//
-		// UPDATE SCORE ONCE A BALL GETS REMOVE
+		// UPDATE SCORE ONCE A BALL GETS REMOVED
 		//
 		gameView.getGameController().getGame().addToScore(points);
 		boolean emptyfield = true;
+		// Check for empty field
 		for (int x = 0; x <= fieldSizeX; x++) {
 			Row[][] rows = game.getRows();
 			if (rows[fieldSizeY][x].getBall() != null) {

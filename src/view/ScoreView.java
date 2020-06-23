@@ -25,6 +25,7 @@ public class ScoreView extends BorderPane {
 	}
 
 	public void createView() {
+		// Create view, add all the labels
 		this.getChildren().clear();
 		getStylesheets().add(this.getClass().getResource("/resources/core.css").toExternalForm());
 		score = new Label("Score: " + Integer.toString(scoreController.getScore()));

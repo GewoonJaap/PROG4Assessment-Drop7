@@ -9,31 +9,34 @@ public class Game {
 	private Ball nextBall;
 	private int ballLeft;
 	private int BallLeft_START = 30;
-	private int fieldSizeX = 6; // Use FieldSize -1
-	private int fieldSizeY = 6; // Use FieldSize -1
-	private int rowSizeX = 64;
-	private int rowSizeY = 64;
-	private double fullBallChance = 0.25;
+	private int fieldSizeX = 6; // Use FieldSize -1 If you want a field that has 7 rows in the X axis, use 6
+	private int fieldSizeY = 6; // Use FieldSize -1 If you want a field that has 7 rows in the Y axis, use 6
+	private int rowSizeX = 64; // px
+	private int rowSizeY = 64; // px
+	private double fullBallChance = 0.25; // Chance of giving a full ball, one you need to break.
 	private Row[][] row;
 
 	public Game() {
+		// Setup the game
 		score = 0;
 		level = 1;
 		ballLeft = BallLeft_START;
 		setNextBall();
 		createRows();
 	}
-	
+
 	private void createRows() {
+		// Create all the rows
 		row = new Row[fieldSizeY + 1][fieldSizeX + 1];
 	}
 
 	public void setNextBall() {
+		// Create a new ball, and lower the amount of balls left.
 		removeBallLeft();
 		int ballNr = (int) Math.floor(Math.random() * (1 - 8) + 8);
 		Random random = new Random();
-		// 25% chance for a full ball
-		if ((random.nextInt((int) (1/fullBallChance)) == 0)) {
+		// Get the chance for a full ball.
+		if ((random.nextInt((int) (1 / fullBallChance)) == 0)) {
 			nextBall = new Ball(ballNr, "/resources/full.png");
 			return;
 		}
@@ -96,11 +99,11 @@ public class Game {
 	public int getRowSizeY() {
 		return rowSizeY;
 	}
-	
-	public Row[][] getRows(){
+
+	public Row[][] getRows() {
 		return row;
 	}
-	
+
 	public void setRows(Row[][] row) {
 		this.row = row;
 	}

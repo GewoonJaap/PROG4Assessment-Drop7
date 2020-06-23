@@ -42,6 +42,7 @@ public class GameController extends Thread {
 		this.start();
 		main.getScene().setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.C) {
+				// Flip-flop the cheatmode
 				cheatmode = !cheatmode;
 				gameView.getScoreController().updateScoreView();
 			} else if (cheatmode) {
@@ -78,29 +79,39 @@ public class GameController extends Thread {
 	}
 
 	public void run() {
+		// Timer loop
+		// Check if it can loop
 		while (loop && !interrupted()) {
 			System.out.println("Loop");
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
+					// Update timeleft in another Thread, otherwise JavaFX doesn't allow it...
 					gameView.getScoreController().updateTimeLeft();
 				}
 			});
 
 			try {
+				// Wait for a few mili seconds to save some CPU cycles before checking if time
+				// is over..
 				Thread.sleep(LOOP_SPEED);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			CURRENT_LOOP_TIME += LOOP_SPEED;
+			// Add looped time to current loop time
+			// Check if the loop time if bigger or equel to the max loop time.
 			if (CURRENT_LOOP_TIME >= LOOP_TIME) {
+				// Game is over
 				System.out.println("Game OVER");
 				boolean restartloop = loop;
 				loop = false;
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
+						// Show game over in anoother Thread, otherwise JavaFX doesn't allow it..
 						showGameOver();
+						// Stop the loop
 						loop = restartloop;
 					}
 				});
@@ -109,10 +120,12 @@ public class GameController extends Thread {
 	}
 
 	public void showGameOver() {
+		// Show gameOver in the game view
 		gameView.showGameOver();
 	}
 
 	public void start() {
+		// Start the loop
 		System.out.println("start");
 		CURRENT_LOOP_TIME = 0;
 		if (t == null && loop) {

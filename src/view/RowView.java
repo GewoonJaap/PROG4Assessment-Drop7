@@ -14,8 +14,10 @@ public class RowView extends BorderPane {
 	private BallView ballView;
 	private int WIDTH;
 	private int HEIGHT;
+	private Color backgroundColor = Color.BLUE;
 
 	public RowView(Row row) {
+		// Create a row
 		this.row = row;
 		this.WIDTH = row.getBoardController().getGame().getRowSizeX();
 		this.HEIGHT = row.getBoardController().getGame().getRowSizeY();
@@ -24,13 +26,16 @@ public class RowView extends BorderPane {
 	}
 
 	public void setRow(Row row) {
+		// Update the row for the view
 		this.row = row;
 		drawView();
 	}
 
 	private void drawView() {
-		this.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		// Draw the row
+		this.setBackground(new Background(new BackgroundFill(backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		try {
+			// Add a ball
 			if (row.getBall() != null) {
 				addBall();
 			}

@@ -16,15 +16,17 @@ public class BoardView extends BorderPane {
 	private RowView[][] rowView;
 	private int ROWS_Y;
 	private int ROWS_X;
-	private double SQUARE_SPACING = 1.0;
+	private double SQUARE_SPACING = 2.0;
 	private BoardController boardController;
 
 	public BoardView(BoardController boardController) {
+		// Setup the boardview
 		boardController.setBoardView(this);
 		this.boardController = boardController;
 		ROWS_X = boardController.getGame().getFieldSizeX() + 1;
 		ROWS_Y = boardController.getGame().getFieldSizeY() + 1;
 		this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		// Create the view, not redraw it.
 		drawView(false);
 	}
 
@@ -34,7 +36,7 @@ public class BoardView extends BorderPane {
 		if (!reDraw) {
 			rowView = new RowView[ROWS_Y][ROWS_X];
 		}
-
+		// Add rows
 		VBox vBox = new VBox(SQUARE_SPACING);
 		for (int y = 0; y < ROWS_Y; y++) {
 			HBox hbox = new HBox(SQUARE_SPACING);
@@ -42,9 +44,11 @@ public class BoardView extends BorderPane {
 			for (int x = 0; x < ROWS_X; x++) {
 				Row newRow = new Row(null, x, y, boardController);
 				if (!reDraw) {
+					// Create a new row and add it
 					row[y][x] = newRow;
 					boardController.getGame().setRows(row);
 				}
+				// Create a new rowView for the selected row
 				rowView[y][x] = new RowView(row[y][x]);
 				hbox.getChildren().add(rowView[y][x]);
 			}
@@ -60,6 +64,5 @@ public class BoardView extends BorderPane {
 	public RowView[][] getRowView() {
 		return rowView;
 	}
-
 
 }

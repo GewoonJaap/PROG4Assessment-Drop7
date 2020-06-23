@@ -10,7 +10,7 @@ public class Row {
 	private BoardController boardController;
 
 	public Row(Ball ball, int x, int y, BoardController boardController) {
-		// TODO Auto-generated constructor stub
+		//Create Row startup
 		this.ball = ball;
 		this.x = x;
 		this.y = y;
@@ -24,7 +24,6 @@ public class Row {
 	}
 
 	public Ball getBall() {
-		// TODO Auto-generated method stub
 		return ball;
 	}
 

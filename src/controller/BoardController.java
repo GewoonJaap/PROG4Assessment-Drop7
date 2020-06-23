@@ -17,6 +17,7 @@ public class BoardController {
 	private Game game;
 
 	public BoardController(GameView gameView) {
+		//Start the controller, set references
 		this.gameView = gameView;
 		this.game = gameView.getGameController().getGame();
 		fieldSizeX = game.getFieldSizeX();
@@ -24,11 +25,16 @@ public class BoardController {
 	}
 
 	public void setBoardView(BoardView boardView) {
+		//Create reference to boardview
 		this.boardView = boardView;
 	}
 
 	public void addRow(Row row) {
-		boardView.addRow(row);
+		//Get rows, modify, update and refrsh the view
+		Row[][] rows = game.getRows();
+		rows[row.getY()][row.getX()] = row;
+		game.setRows(rows);
+		boardView.addRow();
 	}
 
 	//
@@ -37,7 +43,7 @@ public class BoardController {
 	public void clickedRow(Row newRow) {
 		// System.out.println("Clicked row at: X: " + newRow.getX() + " Y:" +
 		// newRow.getY());
-		Row[][] rows = boardView.getRows();
+		Row[][] rows = game.getRows();
 
 		//
 		// GET EMPTY ROW ON Y AXIS
@@ -45,7 +51,7 @@ public class BoardController {
 		for (int y = fieldSizeY; y >= 0; y--) {
 			if (rows[y][newRow.getX()].getBall() == null) {
 				rows[y][newRow.getX()].setBall(gameView.getGameController().getGame().getNextBall());
-				boardView.addRow(rows[y][newRow.getX()]);
+				addRow(rows[y][newRow.getX()]);
 				gameView.getGameController().getGame().setNextBall();
 				gameView.getScoreController().updateScoreView();
 				break;
@@ -78,19 +84,19 @@ public class BoardController {
 	// MOVE BALLSUP ONCE A NEW LEVEL STARTS
 	//
 	private void moveBallsup() {
-		Row[][] rows = boardView.getRows();
+		Row[][] rows = game.getRows();
 		for (int x = 0; x <= fieldSizeX; x++) {
 			for (int y = 0; y <= fieldSizeY; y++) {
 				if (rows[y][x].getBall() != null) {
-					boardView.addRow(new Row(rows[y][x].getBall(), x, y - 1, this));
+					addRow(new Row(rows[y][x].getBall(), x, y - 1, this));
 				}
 			}
 
 		}
-		rows = boardView.getRows();
+		rows = game.getRows();
 		for (int x = 0; x <= fieldSizeX; x++) {
 			int ballNr = (int) Math.floor(Math.random() * (1 - 7) + 7);
-			boardView.addRow(new Row(new Ball(ballNr, "/resources/full.png"), x, fieldSizeY, this));
+			addRow(new Row(new Ball(ballNr, "/resources/full.png"), x, fieldSizeY, this));
 		}
 		gameView.getGameController().getGame().resetBallLeft();
 		gameView.getGameController().getGame().nextlevel();
@@ -98,7 +104,7 @@ public class BoardController {
 	}
 
 	private void checkForDestroy() {
-		Row[][] rows = boardView.getRows();
+		Row[][] rows = game.getRows();
 		ArrayList<Row> ballDestroy = new ArrayList<Row>();
 		for (int y = fieldSizeY; y >= 0; y--) {
 			for (int x = fieldSizeX; x >= 0; x--) {
@@ -200,7 +206,8 @@ public class BoardController {
 				rows[ballDestroy.get(i).getY()][ballDestroy.get(i).getX() + 1].getBall().breakBall();
 			} catch (Exception e) {
 			}
-			boardView.addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
+			
+			addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
 			updateScore(ballDestroy.get(i).getBall().getValue());
 
 		}
@@ -227,7 +234,7 @@ public class BoardController {
 	}
 
 	private void moveBallsDown() {
-		Row[][] rows = boardView.getRows();
+		Row[][] rows = game.getRows();
 		for (int x = 0; x <= fieldSizeX; x++) {
 			int nullpoint = -1;
 			int goDown = -1;
@@ -242,8 +249,8 @@ public class BoardController {
 				if (rows[y][x].getBall() != null && nullpoint != -1) {
 					System.out.println("MOVING BALL WITH NULLPOINT Y: " + nullpoint + "AND Y: " + y + " FINAL POS "
 							+ (y + (nullpoint - y)));
-					boardView.addRow(new Row(rows[y][x].getBall(), x, y + goDown, this));
-					boardView.addRow(new Row(null, x, y, this));
+					addRow(new Row(rows[y][x].getBall(), x, y + goDown, this));
+					addRow(new Row(null, x, y, this));
 				}
 			}
 		}
@@ -257,7 +264,7 @@ public class BoardController {
 		gameView.getGameController().getGame().addToScore(points);
 		boolean emptyfield = true;
 		for (int x = 0; x <= fieldSizeX; x++) {
-			Row[][] rows = boardView.getRows();
+			Row[][] rows = game.getRows();
 			if (rows[fieldSizeY][x].getBall() != null) {
 				emptyfield = false;
 				break;

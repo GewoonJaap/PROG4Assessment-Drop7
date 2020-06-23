@@ -14,12 +14,18 @@ public class Game {
 	private int rowSizeX = 64;
 	private int rowSizeY = 64;
 	private double fullBallChance = 0.25;
+	private Row[][] row;
 
 	public Game() {
 		score = 0;
 		level = 1;
 		ballLeft = BallLeft_START;
 		setNextBall();
+		createRows();
+	}
+	
+	private void createRows() {
+		row = new Row[fieldSizeY + 1][fieldSizeX + 1];
 	}
 
 	public void setNextBall() {
@@ -89,6 +95,14 @@ public class Game {
 
 	public int getRowSizeY() {
 		return rowSizeY;
+	}
+	
+	public Row[][] getRows(){
+		return row;
+	}
+	
+	public void setRows(Row[][] row) {
+		this.row = row;
 	}
 
 }

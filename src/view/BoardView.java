@@ -14,7 +14,6 @@ import model.Row;
 public class BoardView extends BorderPane {
 
 	private RowView[][] rowView;
-	private Row[][] row;
 	private int ROWS_Y;
 	private int ROWS_X;
 	private double SQUARE_SPACING = 1.0;
@@ -30,10 +29,10 @@ public class BoardView extends BorderPane {
 	}
 
 	private void drawView(boolean reDraw) {
+		Row[][] row = boardController.getGame().getRows();
 		this.getChildren().clear();
 		if (!reDraw) {
 			rowView = new RowView[ROWS_Y][ROWS_X];
-			row = new Row[ROWS_Y][ROWS_X];
 		}
 
 		VBox vBox = new VBox(SQUARE_SPACING);
@@ -44,6 +43,7 @@ public class BoardView extends BorderPane {
 				Row newRow = new Row(null, x, y, boardController);
 				if (!reDraw) {
 					row[y][x] = newRow;
+					boardController.getGame().setRows(row);
 				}
 				rowView[y][x] = new RowView(row[y][x]);
 				hbox.getChildren().add(rowView[y][x]);
@@ -53,8 +53,7 @@ public class BoardView extends BorderPane {
 		this.setCenter(vBox);
 	}
 
-	public void addRow(Row row) {
-		this.row[row.getY()][row.getX()] = row;
+	public void addRow() {
 		drawView(true);
 	}
 
@@ -62,8 +61,5 @@ public class BoardView extends BorderPane {
 		return rowView;
 	}
 
-	public Row[][] getRows() {
-		return row;
-	}
 
 }

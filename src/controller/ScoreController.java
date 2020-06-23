@@ -54,5 +54,9 @@ public class ScoreController {
 	public void resetBallLeft() {
 		gameView.getGameController().getGame().resetBallLeft();
 	}
+	
+	public boolean getCheatModeActivated() {
+		return getGameView().getGameController().cheatmodeActivated();
+	}
 
 }

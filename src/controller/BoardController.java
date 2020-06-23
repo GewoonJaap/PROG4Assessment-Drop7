@@ -17,7 +17,7 @@ public class BoardController {
 	private Game game;
 
 	public BoardController(GameView gameView) {
-		//Start the controller, set references
+		// Start the controller, set references
 		this.gameView = gameView;
 		this.game = gameView.getGameController().getGame();
 		fieldSizeX = game.getFieldSizeX();
@@ -25,12 +25,12 @@ public class BoardController {
 	}
 
 	public void setBoardView(BoardView boardView) {
-		//Create reference to boardview
+		// Create reference to boardview
 		this.boardView = boardView;
 	}
 
 	public void addRow(Row row) {
-		//Get rows, modify, update and refrsh the view
+		// Get rows, modify, update and refrsh the view
 		Row[][] rows = game.getRows();
 		rows[row.getY()][row.getX()] = row;
 		game.setRows(rows);
@@ -206,7 +206,7 @@ public class BoardController {
 				rows[ballDestroy.get(i).getY()][ballDestroy.get(i).getX() + 1].getBall().breakBall();
 			} catch (Exception e) {
 			}
-			
+
 			addRow(new Row(null, ballDestroy.get(i).getX(), ballDestroy.get(i).getY(), this));
 			updateScore(ballDestroy.get(i).getBall().getValue());
 

@@ -37,8 +37,7 @@ public class ScoreView extends BorderPane {
 		int currentLoopTime = scoreController.getGameView().getGameController().getCurrentLoopTime();
 		TimeLeft = new Label("TimeLeft: " + Integer.toString(looptime - currentLoopTime));
 		TimeLeft.getStyleClass().add("basicText");
-		cheatmode = new Label("Cheat mode enabled: "
-				+ Boolean.toString(scoreController.getGameView().getGameController().cheatmodeActivated())
+		cheatmode = new Label("Cheat mode enabled: " + Boolean.toString(scoreController.getCheatModeActivated())
 				+ " Press C to toggle");
 		cheatmode.getStyleClass().add("basicText");
 		if (scoreController.getNextBall() != null) {

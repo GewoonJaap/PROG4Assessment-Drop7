@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import model.Ball;
 
 public class ScoreView extends BorderPane {
 
@@ -13,6 +12,7 @@ public class ScoreView extends BorderPane {
 	private Label score;
 	private Label level;
 	private Label ballLeft;
+	private Label TimeLeft;
 	private Label cheatmode;
 	private BallView nextBall;
 	private VBox vBox;
@@ -33,6 +33,10 @@ public class ScoreView extends BorderPane {
 		level.getStyleClass().add("basicText");
 		ballLeft = new Label("Balls left: " + Integer.toString(scoreController.getBallLeft()));
 		ballLeft.getStyleClass().add("basicText");
+		int looptime = scoreController.getGameView().getGameController().getLoopTime();
+		int currentLoopTime = scoreController.getGameView().getGameController().getCurrentLoopTime();
+		TimeLeft = new Label("TimeLeft: " + Integer.toString(looptime - currentLoopTime));
+		TimeLeft.getStyleClass().add("basicText");
 		cheatmode = new Label("Cheat mode enabled: "
 				+ Boolean.toString(scoreController.getGameView().getGameController().cheatmodeActivated())
 				+ " Press C to toggle");
@@ -42,13 +46,19 @@ public class ScoreView extends BorderPane {
 		}
 		vBox = new VBox(vBox_SPACING);
 		if (scoreController.getNextBall() == null) {
-			vBox.getChildren().addAll(score, level, ballLeft, cheatmode);
+			vBox.getChildren().addAll(score, level, ballLeft, TimeLeft, cheatmode);
 		} else {
-			vBox.getChildren().addAll(score, level, ballLeft, cheatmode, nextBall);
+			vBox.getChildren().addAll(score, level, ballLeft, TimeLeft, cheatmode, nextBall);
 		}
 		vBox.setAlignment(Pos.CENTER);
 		this.setCenter(vBox);
 
+	}
+
+	public void UpdateTimeLeft() {
+		int looptime = scoreController.getGameView().getGameController().getLoopTime();
+		int currentLoopTime = scoreController.getGameView().getGameController().getCurrentLoopTime();
+		TimeLeft.setText("TimeLeft: " + Integer.toString(looptime - currentLoopTime));
 	}
 
 }

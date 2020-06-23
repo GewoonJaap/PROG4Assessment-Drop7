@@ -3,7 +3,6 @@ package controller;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Ball;
 import model.Game;
@@ -18,6 +17,7 @@ public class GameController extends Thread {
 	private boolean loop = true;
 	private int LOOP_TIME = 2000;
 	private int CURRENT_LOOP_TIME;
+	private int LOOP_SPEED = 10;
 	private boolean cheatmode = false;
 
 	public GameController(Stage main) {
@@ -80,13 +80,20 @@ public class GameController extends Thread {
 	public void run() {
 		while (loop && !interrupted()) {
 			System.out.println("Loop");
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					gameView.getScoreController().updateTimeLeft();
+				}
+			});
+
 			try {
-				Thread.sleep(100);
+				Thread.sleep(LOOP_SPEED);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			CURRENT_LOOP_TIME += 100;
-			if(CURRENT_LOOP_TIME >= LOOP_TIME) {
+			CURRENT_LOOP_TIME += LOOP_SPEED;
+			if (CURRENT_LOOP_TIME >= LOOP_TIME) {
 				System.out.println("Game OVER");
 				boolean restartloop = loop;
 				loop = false;
@@ -113,10 +120,19 @@ public class GameController extends Thread {
 			t.start();
 
 		}
-		
+
 	}
+
 	public void resetTimer() {
 		CURRENT_LOOP_TIME = 0;
+	}
+
+	public int getCurrentLoopTime() {
+		return CURRENT_LOOP_TIME;
+	}
+
+	public int getLoopTime() {
+		return LOOP_TIME;
 	}
 
 }

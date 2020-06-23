@@ -21,6 +21,16 @@ public class ScoreController {
 		scoreView.createView();
 	}
 
+	public void updateTimeLeft() {
+		if (scoreView != null) {
+			scoreView.UpdateTimeLeft();
+		}
+	}
+
+	public ScoreView getScoreView() {
+		return scoreView;
+	}
+
 	public int getScore() {
 		return gameView.getGameController().getGame().getScore();
 	}

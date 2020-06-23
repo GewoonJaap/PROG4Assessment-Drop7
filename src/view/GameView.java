@@ -3,19 +3,11 @@ package view;
 import controller.BoardController;
 import controller.GameController;
 import controller.ScoreController;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 public class GameView extends BorderPane {
 
@@ -44,7 +36,7 @@ public class GameView extends BorderPane {
 		scoreView = new ScoreView(scoreController);
 
 		boardController = new BoardController(this);
-		BoardView boardView = new BoardView(boardController);
+		boardView = new BoardView(boardController);
 		int sizeX = (gameController.getGame().getFieldSizeX() + 1 * gameController.getGame().getRowSizeX());
 		int sizeY = (gameController.getGame().getFieldSizeY() + 1 * gameController.getGame().getRowSizeY());
 		boardView.setMaxSize(sizeX, sizeY);
